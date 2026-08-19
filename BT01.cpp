@@ -77,3 +77,73 @@ int main() {
     NhanVien ds[100];
     return 0;
 }
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+struct NhanVien {
+    string maNV;
+    string tenNV;
+    double luongCoBan;
+    double heSo;
+};
+
+void nhap1NV(NhanVien &nv) {
+    cout << "Nhap ma NV: ";
+    getline(cin, nv.maNV);
+    cout << "Nhap ten NV: ";
+    getline(cin, nv.tenNV);
+    cout << "Nhap luong co ban: ";
+    cin >> nv.luongCoBan;
+    cout << "Nhap he so luong: ";
+    cin >> nv.heSo;
+    cin.ignore();
+}
+
+void xuat1NV(const NhanVien &nv) {
+    cout << left << setw(12) << nv.maNV 
+         << setw(25) << nv.tenNV 
+         << setw(15) << fixed << setprecision(0) << nv.luongCoBan 
+         << setw(10) << setprecision(2) << nv.heSo << endl;
+}
+
+void nhapDS(NhanVien ds[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "\n--- Nhap thong tin nhan vien thu " << i + 1 << " ---" << endl;
+        nhap1NV(ds[i]);
+    }
+}
+
+void xuatDS(NhanVien ds[], int n) {
+    cout << "\n================ DANH SACH NHAN VIEN ================\n";
+    cout << left << setw(12) << "Ma NV" 
+         << setw(25) << "Ho Ten" 
+         << setw(15) << "Luong CB" 
+         << setw(10) << "He So" << endl;
+    cout << "-----------------------------------------------------\n";
+    for (int i = 0; i < n; i++) {
+        xuat1NV(ds[i]);
+    }
+}
+
+int main() {
+    int n;
+    cout << "Nhap so luong nhan vien: ";
+    cin >> n;
+    cin.ignore(); // Xoa phim Enter con xot lai
+    
+    if (n <= 0 || n > 100) {
+        cout << "So luong nhan vien khong hop le!" << endl;
+        return 0;
+    }
+    
+    NhanVien ds[100];
+    
+    // Nhap va xuat danh sach
+    nhapDS(ds, n);
+    xuatDS(ds, n);
+    
+    return 0;
+}
